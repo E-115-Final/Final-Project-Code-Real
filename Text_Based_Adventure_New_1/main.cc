@@ -11,6 +11,11 @@ using namespace std;
 int response; //variable for handling user response
 bool battle; // is battle happening
 bool victory; // win a battle or not
+int location = 0; // determines which menu (shop, battle, etc) to display
+/* 0 = crossroads
+ * 1 = shop
+ * 2 = battle
+ */
 Enemy* enemy = new Enemy();
 Player* player = new Player();
 void intro()
@@ -29,6 +34,18 @@ void intro()
      cout << "No action corresponds with that number. Try again!" << endl;
      intro();
     }            
+}
+void crossroads()
+{
+    cout << "Where will you go?" << endl;
+    cout << "1: Shop" << endl << "2: Battle" << endl;
+    cin >> response;
+    location = response;
+}
+void shop()
+{
+    cout << "Shop doesn't exist yet." << endl;
+    location = 0;
 }
 void fight()
 {
@@ -52,6 +69,7 @@ void fight()
                     {
                         battle = 0; // battle stops when enemy dies
                         victory = 1; //player wins, victory is true
+                        location = 0;
                         continue;
                     }
                     break;
@@ -69,16 +87,21 @@ void fight()
         {
             battle = 0; //battle stops when player dies
             victory = 0;//player loses, victory is false
+            location = 0;
         }
     }
     if(victory)
     {
         cout << "U win gj, U get " << enemy->xp << " experience points!" << endl;
+        cout << "You get " << enemy->goldDropped << " gold!" << endl;
+        
     }
     else
     {
         cout << "U lose gj." << endl;
     }
+    cout << "After a hard battle, you return home to rest. Wake up the next day ready to take on the day!" << endl;
+
     return;
 }
 int main()
@@ -88,5 +111,17 @@ int main()
     intro();
     while(1)
     {
-    fight();
-    }}
+        if(location == 0)
+        {
+            crossroads();
+        }
+        else if(location == 1)
+        {
+            shop();
+        }
+        else if(location == 2)
+        {
+            fight();
+        }
+    }
+}

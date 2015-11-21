@@ -8,7 +8,9 @@ public:
   int health;
   int currenthealth;
   int defense;
+  int goldDropped;
   int damage;
+  int runChance;
   void attack(Player* p);
   void getAttacked(Player* p);
   void reinitialize();

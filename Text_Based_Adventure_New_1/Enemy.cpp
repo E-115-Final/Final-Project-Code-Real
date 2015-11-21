@@ -23,4 +23,5 @@ void Enemy::reinitialize()
     currenthealth = health;
     defense = 0;
     damage = rand() % 15 + 10;
+    goldDropped = 10;
 }
